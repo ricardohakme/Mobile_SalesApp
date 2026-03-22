@@ -1,0 +1,139 @@
+object frMain: TfrMain
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 470
+  ClientWidth = 344
+  Fill.Kind = Solid
+  Padding.Left = 10.000000000000000000
+  Padding.Top = 10.000000000000000000
+  Padding.Right = 10.000000000000000000
+  Padding.Bottom = 10.000000000000000000
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 3
+  object tbMain: TToolBar
+    Position.X = 10.000000000000000000
+    Position.Y = 10.000000000000000000
+    Size.Width = 324.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    TintColor = claDarkblue
+    object lblTitle: TLabel
+      Align = Contents
+      StyledSettings = [Family, Size]
+      Size.Width = 324.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      Text = 'Mobile Sales App'
+      TabOrder = 0
+    end
+  end
+  object S: TLayout
+    Align = Client
+    Margins.Left = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    Size.Width = 304.000000000000000000
+    Size.Height = 352.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object lstClients: TListBox
+      Align = Client
+      Size.Width = 304.000000000000000000
+      Size.Height = 320.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      DisableFocusEffect = True
+      DefaultItemStyles.ItemStyle = 'listboxitemrightdetail'
+      DefaultItemStyles.GroupHeaderStyle = ''
+      DefaultItemStyles.GroupFooterStyle = ''
+      Viewport.Width = 304.000000000000000000
+      Viewport.Height = 320.000000000000000000
+    end
+    object txtSearchClient: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      Align = Top
+      StyleLookup = 'searchedit'
+      TabOrder = 1
+      Size.Width = 304.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+      TextPrompt = 'Digite o termo da pesquisa'
+      KillFocusByReturn = True
+      OnChange = txtSearchClientChange
+    end
+  end
+  object Rectangle1: TRectangle
+    Align = MostBottom
+    Fill.Color = xFFD6D6D6
+    Margins.Left = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    Position.X = 20.000000000000000000
+    Position.Y = 410.000000000000000000
+    Size.Width = 304.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    object GridPanelLayout1: TGridPanelLayout
+      Align = Client
+      Size.Width = 304.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      ColumnCollection = <
+        item
+          Value = 50.000000000000000000
+        end
+        item
+          Value = 50.000000000000000000
+        end>
+      ControlCollection = <
+        item
+          Column = 0
+          Control = btnSendOrder
+          Row = 0
+        end
+        item
+          Column = 1
+          Control = btnHistory
+          Row = 0
+        end>
+      RowCollection = <
+        item
+          Value = 100.000000000000000000
+        end>
+      object btnSendOrder: TButton
+        Align = Client
+        StyledSettings = [Family, Size, Style]
+        Size.Width = 152.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Text = 'Novo Pedido'
+        TextSettings.FontColor = claWhite
+        TextSettings.Trimming = None
+        TintColor = claDarkblue
+        OnClick = btnSendOrderClick
+      end
+      object btnHistory: TButton
+        Align = Client
+        StyledSettings = [Family, Size, Style]
+        Size.Width = 152.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Text = 'Hist'#243'rico'
+        TextSettings.FontColor = claWhite
+        TextSettings.Trimming = None
+        TintColor = claGray
+        OnClick = btnHistoryClick
+      end
+    end
+  end
+end
