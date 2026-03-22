@@ -1,4 +1,4 @@
-object frMain: TfrMain
+object S: TS
   Left = 0
   Top = 0
   Caption = 'Form1'
@@ -15,11 +15,13 @@ object frMain: TfrMain
   OnCreate = FormCreate
   DesignerMasterStyle = 3
   object tbMain: TToolBar
+    HitTest = False
     Position.X = 10.000000000000000000
     Position.Y = 10.000000000000000000
     Size.Width = 324.000000000000000000
     Size.Height = 48.000000000000000000
     Size.PlatformDefault = False
+    StyleLookup = 'toolbarstyle'
     TabOrder = 0
     TintColor = claDarkblue
     object lblTitle: TLabel
@@ -71,7 +73,7 @@ object frMain: TfrMain
   end
   object Rectangle1: TRectangle
     Align = MostBottom
-    Fill.Color = xFFD6D6D6
+    Fill.Color = xFFA7A7A7
     Margins.Left = 10.000000000000000000
     Margins.Right = 10.000000000000000000
     Position.X = 20.000000000000000000
@@ -116,7 +118,6 @@ object frMain: TfrMain
         Size.PlatformDefault = False
         TabOrder = 1
         Text = 'Novo Pedido'
-        TextSettings.FontColor = claWhite
         TextSettings.Trimming = None
         TintColor = claDarkblue
         OnClick = btnSendOrderClick
@@ -129,7 +130,6 @@ object frMain: TfrMain
         Size.PlatformDefault = False
         TabOrder = 0
         Text = 'Hist'#243'rico'
-        TextSettings.FontColor = claWhite
         TextSettings.Trimming = None
         TintColor = claGray
         OnClick = btnHistoryClick

@@ -9,7 +9,7 @@ uses
   FMX.StdCtrls, Client, FMX.Edit, FMX.Objects;
 
 type
-  TfrMain = class(TForm)
+  TS = class(TForm)
     tbMain: TToolBar;
     lblTitle: TLabel;
     S: TLayout;
@@ -33,7 +33,7 @@ type
   end;
 
 var
-  frMain: TfrMain;
+  S: TS;
 
 implementation
 
@@ -41,12 +41,12 @@ implementation
 
 { TfrMain }
 
-procedure TfrMain.btnHistoryClick(Sender: TObject);
+procedure TS.btnHistoryClick(Sender: TObject);
 begin
   ShowMessage('Histórico de pedidos não implementado (exemplo para portfólio).');
 end;
 
-procedure TfrMain.btnSendOrderClick(Sender: TObject);
+procedure TS.btnSendOrderClick(Sender: TObject);
 begin
   if lstClients.ItemIndex < 0 then
     Exit;
@@ -55,14 +55,41 @@ begin
     ShowMessage('Pedido enviado com sucesso!');
 end;
 
-procedure TfrMain.FormCreate(Sender: TObject);
+procedure TS.FormCreate(Sender: TObject);
+  procedure SetToolbarColor(TB: TToolBar; Color: TAlphaColor);
+  var
+    Obj: TFmxObject;
+  begin
+    TB.ApplyStyleLookup;
+    for Obj in TB.Children do
+    begin
+      if Obj is TRectangle then
+      begin
+        TRectangle(Obj).Fill.Color := Color;
+        Break;
+      end;
+    end;
+  end;
 begin
   FViewModel := TClientViewModel.Create;
   FApiService := TApiService.Create;
   LoadClients;
+
+  // -------------------------------
+  // Cores gerais
+  // -------------------------------
+
+  // Form background
+  Self.Fill.Color := TAlphaColorRec.Lightgray; // cinza claro
+
+  // ToolBar
+  SetToolbarColor(tbMain, TAlphaColorRec.Dodgerblue);
+  lblTitle.TextSettings.FontColor := TAlphaColorRec.White;
+  lblTitle.TextSettings.Font.Size := 16;
+  lblTitle.TextSettings.Font.Style := [TFontStyle.fsBold];
 end;
 
-procedure TfrMain.LoadClients(Filter: string = '');
+procedure TS.LoadClients(Filter: string = '');
 var
   Client: TClient;
 begin
@@ -73,7 +100,7 @@ begin
       lstClients.Items.Add(Client.Name);
 end;
 
-procedure TfrMain.txtSearchClientChange(Sender: TObject);
+procedure TS.txtSearchClientChange(Sender: TObject);
 begin
  LoadClients(txtSearchClient.Text);
 end;

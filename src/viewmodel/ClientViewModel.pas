@@ -3,7 +3,7 @@ unit ClientViewModel;
 interface
 
 uses
-  System.Generics.Collections, Client;
+  System.SysUtils, System.Classes, System.Generics.Collections, Client, System.JSON, System.IOUtils;
 
 type
   TClientViewModel = class
@@ -13,27 +13,19 @@ type
     constructor Create;
     destructor Destroy; override;
 
+    procedure LoadFromJSON(FileName: string);
     function GetClients: TObjectList<TClient>;
   end;
 
 implementation
 
+{ TClientViewModel }
+
 constructor TClientViewModel.Create;
-var
-  Client: TClient;
 begin
   FClients := TObjectList<TClient>.Create;
-
-  // Dados mockados
-  Client := TClient.Create;
-  Client.Id := 1;
-  Client.Name := 'Cliente A';
-  FClients.Add(Client);
-
-  Client := TClient.Create;
-  Client.Id := 2;
-  Client.Name := 'Cliente B';
-  FClients.Add(Client);
+  // Carrega o JSON com clientes fakes
+  LoadFromJSON('clients.json');
 end;
 
 destructor TClientViewModel.Destroy;
@@ -45,6 +37,37 @@ end;
 function TClientViewModel.GetClients: TObjectList<TClient>;
 begin
   Result := FClients;
+end;
+
+procedure TClientViewModel.LoadFromJSON(FileName: string);
+var
+  JSONData: string;
+  JSONArray: TJSONArray;
+  JSONObject: TJSONObject;
+  Client: TClient;
+  I: Integer;
+begin
+  FClients.Clear;
+
+  if not FileExists(FileName) then
+    Exit;
+
+  JSONData := TFile.ReadAllText(FileName, TEncoding.UTF8);
+  JSONArray := TJSONObject.ParseJSONValue(JSONData) as TJSONArray;
+  if JSONArray = nil then Exit;
+
+  try
+    for I := 0 to JSONArray.Count - 1 do
+    begin
+      JSONObject := JSONArray.Items[I] as TJSONObject;
+      Client := TClient.Create;
+      Client.Id := JSONObject.GetValue<Integer>('id');
+      Client.Name := JSONObject.GetValue<string>('name');
+      FClients.Add(Client);
+    end;
+  finally
+    JSONArray.Free;
+  end;
 end;
 
 end.
