@@ -12,7 +12,7 @@ type
   TfrMain = class(TForm)
     tbMain: TToolBar;
     lblTitle: TLabel;
-    layoutMain: TLayout;
+    S: TLayout;
     lstClients: TListBox;
     txtSearchClient: TEdit;
     Rectangle1: TRectangle;

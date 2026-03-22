@@ -35,7 +35,7 @@ object frMain: TfrMain
       TabOrder = 0
     end
   end
-  object layoutMain: TLayout
+  object S: TLayout
     Align = Client
     Margins.Left = 10.000000000000000000
     Margins.Right = 10.000000000000000000
